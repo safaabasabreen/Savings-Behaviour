@@ -273,7 +273,6 @@ for (i in 1:6) {
 
 
 # add age column
-df$age <- (2018 - df$indobyr)# check date
 df$squr_age <- (df$age * df$age)
 # Filter out rows with unrealistic age values (e.g., age greater than 100)
 df <- df[df$age <= 150, ]
