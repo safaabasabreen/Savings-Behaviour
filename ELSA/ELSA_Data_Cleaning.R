@@ -79,7 +79,7 @@ getwd()
 #Variable = sclifed	Variable label = How much agrees with the statement: so far I have got the important things I want in life
 #Variable = sclifee	Variable label = How much agrees with the statement: if I could live my life again, I would change almost nothing
 #Variable = scworkd	Variable label = Whether feels their salary is adequate# dropped due to NA`s`
-#Variable = scovsa	Variable label = How satisfied respondent is overall with their life nowadays# dropped (NA¬s)
+#Variable = scovsa	Variable label = How satisfied respondent is overall with their life nowadays# dropped (NAÂ¬s)
 #empinc_r_s Respondent's income from employment (individual level)#= respondent total net employment income - summary var
 #eqto7nc_bu_s =	Total	income	adjusted	for	family	size	('equivalised')		
 #to7nc_bu_s	=	Unadjusted	('unequivalised')	total	income	
@@ -161,35 +161,35 @@ w9 <- read_dta('wave_9_elsa_data_eul_v1.dta') %>%
 
 #**********************Rest of variables****************
 wc2 <- read_dta("wave_2_ifs_derived_variables.dta") %>%
-  select("idauniq", "ngrandchinhh", "numhhk013","wselfd_p", "wselfd" ) %>%
+  select("idauniq", "ngrandchinhh", "numhhk013","wselfd_p", "wselfd", "age" ) %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 2)
 wc3 <- read_dta("wave_3_ifs_derived_variables.dta") %>%
-  select("idauniq", "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd"  ) %>%
+  select("idauniq", "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd", "age"  ) %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 3)
 wc4 <- read_dta("wave_4_ifs_derived_variables.dta") %>%
-  select("idauniq",  "ngrandchinhh", "numhhk013","wselfd_p", "wselfd" ) %>%
+  select("idauniq",  "ngrandchinhh", "numhhk013","wselfd_p", "wselfd", "age" ) %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 4)
 wc5 <- read_dta("wave_5_ifs_derived_variables.dta") %>%
-  select("idauniq",  "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd" ) %>%#, "iintdatm", "iintdaty" repeated check why
+  select("idauniq",  "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd", "age" ) %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 5)
 wc6 <- read_dta("wave_6_ifs_derived_variables.dta") %>%
-  select("idauniq",  "ngrandchinhh", "numhhk013","wselfd_p", "wselfd" ) %>%
+  select("idauniq",  "ngrandchinhh", "numhhk013","wselfd_p", "wselfd", "age" ) %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 6)
 wc7 <- read_dta("wave_7_ifs_derived_variables.dta") %>%
-  select("idauniq", "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd") %>%
+  select("idauniq", "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd", "age") %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 7)
 wc8 <- read_dta("wave_8_elsa_ifs_dvs_eul_v1.dta") %>%
-  select("idauniq",  "ngrandchinhh", "numhhk013","wselfd_p", "wselfd" ) %>%
+  select("idauniq",  "ngrandchinhh", "numhhk013","wselfd_p", "wselfd", "age" ) %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 8)
 wc9 <- read_dta("wave_9_ifs_derived_variables.dta") %>%
-  select("idauniq",  "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd") %>%
+  select("idauniq",  "ngrandchinhh", "numhhk013", "wselfd_p", "wselfd", "age") %>%
   rename_at(vars(starts_with("_")), ~str_replace(.,"_", "")) %>%
   mutate(wave = 9)
 #****************************************************************************
@@ -254,8 +254,7 @@ df <- merge(Elsa, Elsa3, by=c("idauniq","wave"))
 df %>% select(sort(names(.))) %>%    # arrange columns in alphabetical order
   select(idauniq, wave, everything())  # put idauniq in front
 
-rm(Elsa_w2, Elsa_w3, Elsa_w4,Elsa_w5, Elsa_w6, Elsa_w7, Elsa_w8, Elsa_w9, w2, w3, w4, w5, w6,w7, w8, w9, s, ss, raw, SB_balanced, missval, i, Elsa1, Elsa2, Elsa3, wc2, wc3, wc4, wc5, wc6,wc7, wc8, wc9 ) 
-#https://dplyr.tidyverse.org/reference/bind.html
+rm(Elsa_w2, Elsa_w3, Elsa_w4,Elsa_w5, Elsa_w6, Elsa_w7, Elsa_w8, Elsa_w9, w2, w3, w4, w5, w6,w7, w8, w9, Elsa1, Elsa2, Elsa3, wc2, wc3, wc4, wc5, wc6,wc7, wc8, wc9 ) 
 
 #****************************************************************************
 
@@ -367,7 +366,7 @@ Elsa_filled <- Elsa_merged %>%
   ungroup()
 df <- Elsa_filled
 
-dim(df)# 77975    73
+dim(df)# 77975    51
 length( unique(df$idauniq))#[1] 17727
 DataExplorer::plot_missing(df)
 ELSA <- df 
@@ -377,4 +376,5 @@ ELSA <- df
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 library(haven)
 write_dta(ELSA, "C:/Users/data/ELSA.dta")
+
 
