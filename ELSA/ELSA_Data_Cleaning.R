@@ -274,9 +274,7 @@ for (i in 1:6) {
 
 # add age column
 df$squr_age <- (df$age * df$age)
-# Filter out rows with unrealistic age values (e.g., age greater than 100)
-df <- df[df$age <= 150, ]
-# Verify the changes
+# Check age
 summary(df$age)
 # add location column
 # Define variables
