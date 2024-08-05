@@ -89,7 +89,7 @@ local cons1  Lincome age squr_age has_child married higher_ed unemployed unemplo
 **Tables
 *%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 *Tab.1: Descriptive Statistics of the Study Sample Between 2004 and 2019
-tabstat savings_bu_s SWB age totinc_bu_s debt_bu_s household_size health age female married has_child higher_ed self_employed unemployed retired unemployed_spouse, c(stat) stat(n mean sd)
+tabstat savings_bu_s SWB age totinc_bu_s netfw_bu_s debt_bu_s household_size health female married has_child higher_ed self_employed unemployed retired unemployed_spouse, c(stat) stat(n mean sd)
 ***********************************************
 ***********************************************
 *Tab.2: OLS and 2SLS Regressions of Subjective Well-being on Ln(Savings) with Sleep Disruption Instruments:*Non-retired vs Retired
